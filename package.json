@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "echo 'no build script'"
+    "build": "vite build"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.5.1",

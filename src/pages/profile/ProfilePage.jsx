@@ -57,17 +57,18 @@ const ProfilePage = () => {
   }
 
   return (
-    <Box sx={{ minHeight: "100vh", bgcolor: "background.default", py: 4 }}>
+    <Box sx={{ minHeight: "100vh", bgcolor: "background.default", py: 5 }}> {/* Increased py */}
       <Container maxWidth="lg">
-        <Paper sx={{ p: 3, mb: 4 }}>
-          <Grid container spacing={3} alignItems="center">
+        <Paper sx={{ p: 4, mb: 5, borderRadius: 3 }}> {/* Increased p, mb and custom borderRadius */}
+          <Grid container spacing={4} alignItems="center"> {/* Increased spacing */}
             <Grid item>
               <Avatar
                 sx={{
-                  width: 100,
-                  height: 100,
-                  bgcolor: "primary.main",
-                  fontSize: "2rem",
+                  width: 120, // Increased size
+                  height: 120, // Increased size
+                  bgcolor: "primary.light", // Lighter background for avatar
+                  fontSize: "3rem", // Increased font size for initials
+                  color: "primary.contrastText"
                 }}
               >
                 {user.firstName?.charAt(0)}
@@ -75,10 +76,10 @@ const ProfilePage = () => {
               </Avatar>
             </Grid>
             <Grid item xs>
-              <Typography variant="h4" gutterBottom>
+              <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 700 }}> {/* Changed to h3, added component prop for semantics */}
                 {user.firstName} {user.lastName}
               </Typography>
-              <Typography variant="body1" color="text.secondary">
+              <Typography variant="body1" color="text.secondary" sx={{ mb: 1 }}> {/* Added mb */}
                 {user.email}
               </Typography>
               {profile?.bio && (
@@ -88,7 +89,7 @@ const ProfilePage = () => {
               )}
             </Grid>
             <Grid item>
-              <Button variant="contained" onClick={() => navigate("/dashboard")}>
+              <Button variant="outlined" color="secondary" onClick={() => navigate("/dashboard")}> {/* Changed to outlined */}
                 Back to Dashboard
               </Button>
             </Grid>
@@ -96,12 +97,12 @@ const ProfilePage = () => {
         </Paper>
 
         {error && (
-          <Alert severity="error" sx={{ mb: 3 }}>
+          <Alert severity="error" sx={{ mb: 4, borderRadius: 2 }}> {/* Increased mb and custom borderRadius */}
             {error}
           </Alert>
         )}
 
-        <Paper sx={{ mb: 4 }}>
+        <Paper sx={{ mb: 4, borderRadius: 3, overflow: 'hidden' }}> {/* Custom borderRadius and overflow hidden for cleaner tabs */}
           <Tabs
             value={activeTab}
             onChange={handleTabChange}
@@ -109,15 +110,28 @@ const ProfilePage = () => {
             indicatorColor="primary"
             textColor="primary"
             aria-label="profile tabs"
+            sx={{
+              borderBottom: 1,
+              borderColor: 'divider',
+              '& .MuiTab-root': {
+                py: 1.5, // Adjust tab padding
+                textTransform: 'capitalize', // Nicer capitalization
+                fontSize: '1rem',
+                fontWeight: 500,
+              },
+              '& .Mui-selected': {
+                color: 'primary.dark', // Darker color for selected tab
+              },
+            }}
           >
-            <Tab icon={<PersonOutline />} label="Personal Info" />
-            <Tab icon={<School />} label="Education" />
-            <Tab icon={<Psychology />} label="Skills" />
-            <Tab icon={<Description />} label="Resume" />
+            <Tab icon={<PersonOutline sx={{ mb: 0.5 }} />} iconPosition="start" label="Personal Info" /> {/* Adjusted icon margin */}
+            <Tab icon={<School sx={{ mb: 0.5 }} />} iconPosition="start" label="Education" />
+            <Tab icon={<Psychology sx={{ mb: 0.5 }} />} iconPosition="start" label="Skills" />
+            <Tab icon={<Description sx={{ mb: 0.5 }} />} iconPosition="start" label="Resume" />
           </Tabs>
-          <Divider />
+          {/* Divider is removed as borderBottom on Tabs serves a similar purpose */}
 
-          <Box sx={{ p: 3 }}>
+          <Box sx={{ p: 4 }}> {/* Increased padding for tab content */}
             {isLoading ? (
               <Box sx={{ display: "flex", justifyContent: "center", p: 4 }}>
                 <CircularProgress />

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { Box, Grid, TextField, Button, Typography, CircularProgress, Divider, InputAdornment } from "@mui/material"
+import { Box, Grid, TextField, Button, Typography, CircularProgress, Divider, InputAdornment, Paper } from "@mui/material" // Added Paper
 import { Phone, Home, Language, GitHub, LinkedIn, Cake } from "@mui/icons-material"
 import { updateUserProfile } from "../../store/slices/profileSlice"
 import { addToast } from "../../store/slices/uiSlice"
@@ -52,144 +52,155 @@ const PersonalInfoTab = ({ profile = {}, userId }) => {
   }
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
-      <Typography variant="h6" gutterBottom>
-        Personal Information
-      </Typography>
-      <Typography variant="body2" color="text.secondary" paragraph>
-        Update your personal details and contact information
-      </Typography>
+    <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 4 }}> {/* Added gap and flex properties */}
+      {/* Removed old Typography headers */}
 
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Bio"
-            multiline
-            rows={4}
-            value={formData.bio}
-            onChange={handleChange("bio")}
-            placeholder="Write a short bio about yourself"
-            helperText="A brief description about yourself, your interests, and career goals"
-          />
+      <Paper elevation={2} sx={{ p: 3, borderRadius: 2 }}> {/* Section 1: Bio */}
+        <Typography variant="h5" component="h3" gutterBottom sx={{ mb: 2, fontWeight: 600 }}>
+          About Me
+        </Typography>
+        <TextField
+          fullWidth
+          variant="outlined" // Explicitly set variant
+          label="Bio"
+          multiline
+          rows={4}
+          value={formData.bio}
+          onChange={handleChange("bio")}
+          placeholder="Write a short bio about yourself"
+          helperText="A brief description about yourself, your interests, and career goals"
+        />
+      </Paper>
+
+      <Paper elevation={2} sx={{ p: 3, borderRadius: 2 }}> {/* Section 2: Contact & DOB */}
+        <Typography variant="h5" component="h3" gutterBottom sx={{ mb: 3, fontWeight: 600 }}>
+          Contact & Personal Details
+        </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="Phone Number"
+              value={formData.phone}
+              onChange={handleChange("phone")}
+              placeholder="+91 9876543210"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Phone color="primary" /> {/* Changed color */}
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="Date of Birth"
+              type="date"
+              value={formData.dateOfBirth}
+              onChange={handleChange("dateOfBirth")}
+              InputLabelProps={{ shrink: true }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Cake color="primary" /> {/* Changed color */}
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="Address"
+              value={formData.address}
+              onChange={handleChange("address")}
+              placeholder="Your current address"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Home color="primary" /> {/* Changed color */}
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
         </Grid>
+      </Paper>
+      
+      <Paper elevation={2} sx={{ p: 3, borderRadius: 2 }}> {/* Section 3: Online Presence */}
+        <Typography variant="h5" component="h3" gutterBottom sx={{ mb: 3, fontWeight: 600 }}>
+          Online Presence
+        </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={4}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="Personal Website"
+              value={formData.website}
+              onChange={handleChange("website")}
+              placeholder="yourwebsite.com"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Language color="primary" /> {/* Changed color */}
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
 
-        <Grid item xs={12} md={6}>
-          <TextField
-            fullWidth
-            label="Phone Number"
-            value={formData.phone}
-            onChange={handleChange("phone")}
-            placeholder="+91 9876543210"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Phone color="action" />
-                </InputAdornment>
-              ),
-            }}
-          />
+          <Grid item xs={12} md={4}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="GitHub"
+              value={formData.github}
+              onChange={handleChange("github")}
+              placeholder="github.com/username"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <GitHub color="primary" /> {/* Changed color */}
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
+
+          <Grid item xs={12} md={4}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="LinkedIn"
+              value={formData.linkedin}
+              onChange={handleChange("linkedin")}
+              placeholder="linkedin.com/in/username"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <LinkedIn color="primary" /> {/* Changed color */}
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
         </Grid>
+      </Paper>
 
-        <Grid item xs={12} md={6}>
-          <TextField
-            fullWidth
-            label="Date of Birth"
-            type="date"
-            value={formData.dateOfBirth}
-            onChange={handleChange("dateOfBirth")}
-            InputLabelProps={{ shrink: true }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Cake color="action" />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Address"
-            value={formData.address}
-            onChange={handleChange("address")}
-            placeholder="Your current address"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Home color="action" />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-
-        <Grid item xs={12}>
-          <Divider sx={{ my: 2 }} />
-          <Typography variant="subtitle1" gutterBottom>
-            Online Presence
-          </Typography>
-        </Grid>
-
-        <Grid item xs={12} md={4}>
-          <TextField
-            fullWidth
-            label="Personal Website"
-            value={formData.website}
-            onChange={handleChange("website")}
-            placeholder="yourwebsite.com"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Language color="action" />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-
-        <Grid item xs={12} md={4}>
-          <TextField
-            fullWidth
-            label="GitHub"
-            value={formData.github}
-            onChange={handleChange("github")}
-            placeholder="github.com/username"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <GitHub color="action" />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-
-        <Grid item xs={12} md={4}>
-          <TextField
-            fullWidth
-            label="LinkedIn"
-            value={formData.linkedin}
-            onChange={handleChange("linkedin")}
-            placeholder="linkedin.com/in/username"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <LinkedIn color="action" />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-
-        <Grid item xs={12} sx={{ mt: 2, display: "flex", justifyContent: "flex-end" }}>
-          <Button type="submit" variant="contained" disabled={isSubmitting}>
-            {isSubmitting ? <CircularProgress size={24} /> : "Save Changes"}
+      <Box sx={{ mt: 2, display: "flex", justifyContent: "flex-end" }}> {/* Keep button at the end, removed Grid item wrapper */}
+          <Button type="submit" variant="contained" size="large" disabled={isSubmitting} sx={{ px: 4, py: 1.5 }}> {/* Made button larger, consistent with previous intent */}
+            {isSubmitting ? <CircularProgress size={24} color="inherit" /> : "Save Changes"}
           </Button>
-        </Grid>
-      </Grid>
+      </Box> {/* Corrected closing tag for the button's Box */}
+      {/* Removed extraneous </Grid> tag that was here */}
     </Box>
   )
 }

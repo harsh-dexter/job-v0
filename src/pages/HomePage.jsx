@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { Box, AppBar, Toolbar, Typography, Button, Container, Grid, Card, CardContent, Chip, Fab } from "@mui/material"
+import { Box, AppBar, Toolbar, Typography, Button, Container, Grid, Card, CardContent, Fab } from "@mui/material"
 import { ArrowForward, People, Work, School, TrackChanges, Security, FlashOn, DataObject } from "@mui/icons-material"
 import MockDataDisplay from "../components/MockDataDisplay"
 
@@ -98,53 +98,162 @@ const HomePage = () => {
       {/* Hero Section */}
       <Box
         sx={{
-          background: "linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%)",
-          py: 10,
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          position: "relative",
+          overflow: "hidden",
+          py: { xs: 8, md: 12 },
           px: 2,
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background:
+              'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx=".5" cy=".5" r=".5"><stop offset="0%" stopColor="%23ffffff" stopOpacity=".1"/><stop offset="100%" stopColor="%23ffffff" stopOpacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>\') no-repeat center center',
+            backgroundSize: "cover",
+            opacity: 0.1,
+          },
         }}
       >
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
           <Box sx={{ textAlign: "center" }}>
-            <Chip label="🚀 Now Live for Indian Universities" sx={{ mb: 3, bgcolor: "background.paper" }} />
+            <Box
+              sx={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 1,
+                bgcolor: "rgba(255, 255, 255, 0.15)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                borderRadius: 50,
+                px: 3,
+                py: 1,
+                mb: 4,
+              }}
+            >
+              <Box
+                sx={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: "50%",
+                  bgcolor: "#10b981",
+                  animation: "pulse 2s infinite",
+                  "@keyframes pulse": {
+                    "0%, 100%": { opacity: 1 },
+                    "50%": { opacity: 0.5 },
+                  },
+                }}
+              />
+              <Typography variant="body2" sx={{ color: "white", fontWeight: 500 }}>
+                🚀 Now Live for Indian Universities
+              </Typography>
+            </Box>
 
             <Typography
-              variant="h2"
+              variant="h1"
               component="h1"
               gutterBottom
-              fontWeight="bold"
               sx={{
-                fontSize: { xs: "2.5rem", md: "3.5rem" },
+                color: "white",
                 mb: 3,
+                fontSize: { xs: "2.5rem", md: "4rem", lg: "4.5rem" },
+                fontWeight: 800,
+                lineHeight: 1.1,
+                textShadow: "0 4px 20px rgba(0,0,0,0.3)",
               }}
             >
               Your Gateway to
-              <Box component="span" sx={{ color: "primary.main" }}>
-                {" "}
+              <Box
+                component="span"
+                sx={{
+                  display: "block",
+                  background: "linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
                 Career Success
               </Box>
             </Typography>
 
-            <Typography variant="h6" color="text.secondary" sx={{ mb: 4, maxWidth: 600, mx: "auto" }}>
+            <Typography
+              variant="h5"
+              sx={{
+                color: "rgba(255, 255, 255, 0.9)",
+                mb: 6,
+                maxWidth: 700,
+                mx: "auto",
+                fontWeight: 400,
+                lineHeight: 1.6,
+              }}
+            >
               CampusJobs is the specialized platform designed exclusively for undergraduate students in India. Discover
               internships, part-time jobs, and entry-level positions that fit your academic schedule.
             </Typography>
 
-            <Box sx={{ display: "flex", gap: 2, justifyContent: "center", flexWrap: "wrap" }}>
+            <Box sx={{ display: "flex", gap: 3, justifyContent: "center", flexWrap: "wrap", mb: 6 }}>
               <Link to="/auth/register" style={{ textDecoration: "none" }}>
-                <Button variant="contained" size="large" endIcon={<ArrowForward />} sx={{ minWidth: 200 }}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  endIcon={<ArrowForward />}
+                  sx={{
+                    minWidth: 220,
+                    py: 2,
+                    fontSize: "1.1rem",
+                    background: "linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)",
+                    color: "#1f2937",
+                    fontWeight: 700,
+                    "&:hover": {
+                      background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
+                      transform: "translateY(-2px)",
+                      boxShadow: "0 10px 25px rgba(245, 158, 11, 0.4)",
+                    },
+                  }}
+                >
                   Start Your Journey
                 </Button>
               </Link>
               <Link to="/auth/login" style={{ textDecoration: "none" }}>
-                <Button variant="outlined" size="large" sx={{ minWidth: 200 }}>
+                <Button
+                  variant="outlined"
+                  size="large"
+                  sx={{
+                    minWidth: 220,
+                    py: 2,
+                    fontSize: "1.1rem",
+                    borderColor: "rgba(255, 255, 255, 0.3)",
+                    color: "white",
+                    fontWeight: 600,
+                    backdropFilter: "blur(10px)",
+                    "&:hover": {
+                      borderColor: "rgba(255, 255, 255, 0.5)",
+                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+                      transform: "translateY(-2px)",
+                    },
+                  }}
+                >
                   I'm a Recruiter
                 </Button>
               </Link>
             </Box>
 
             {/* Demo Notice */}
-            <Box sx={{ mt: 4, p: 2, bgcolor: "warning.light", borderRadius: 1, maxWidth: 600, mx: "auto" }}>
-              <Typography variant="body2" color="warning.dark">
+            <Box
+              sx={{
+                maxWidth: 600,
+                mx: "auto",
+                p: 3,
+                bgcolor: "rgba(255, 255, 255, 0.1)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                borderRadius: 3,
+              }}
+            >
+              <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.9)", fontWeight: 500 }}>
                 🎯 <strong>Demo Mode:</strong> This is a fully functional demo with mock data. Click the data icon
                 (bottom right) to view sample users and jobs!
               </Typography>
@@ -154,12 +263,23 @@ const HomePage = () => {
       </Box>
 
       {/* Features Section */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Box sx={{ textAlign: "center", mb: 6 }}>
-          <Typography variant="h3" gutterBottom fontWeight="bold">
+      <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Box sx={{ textAlign: "center", mb: 8 }}>
+          <Typography
+            variant="h2"
+            gutterBottom
+            sx={{
+              background: "linear-gradient(135deg, #1f2937 0%, #4b5563 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              fontWeight: 800,
+              mb: 2,
+            }}
+          >
             Why Choose CampusJobs?
           </Typography>
-          <Typography variant="h6" color="text.secondary">
+          <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 600, mx: "auto" }}>
             Built specifically for the unique needs of undergraduate students
           </Typography>
         </Box>
@@ -167,27 +287,43 @@ const HomePage = () => {
         <Grid container spacing={4}>
           {features.map((feature, index) => (
             <Grid size={{ xs: 12, md: 6, lg: 4 }} key={index}>
-              <Card sx={{ height: "100%", p: 2 }}>
-                <CardContent>
+              <Card
+                sx={{
+                  height: "100%",
+                  p: 4,
+                  position: "relative",
+                  overflow: "hidden",
+                  "&::before": {
+                    content: '""',
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: 4,
+                    background: `linear-gradient(90deg, ${feature.color} 0%, ${feature.color}80 100%)`,
+                  },
+                }}
+              >
+                <CardContent sx={{ p: 0 }}>
                   <Box
                     sx={{
-                      width: 48,
-                      height: 48,
-                      bgcolor: `${feature.color}20`,
-                      borderRadius: 1,
+                      width: 64,
+                      height: 64,
+                      background: `linear-gradient(135deg, ${feature.color}20 0%, ${feature.color}10 100%)`,
+                      borderRadius: 3,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      mb: 2,
+                      mb: 3,
                       color: feature.color,
                     }}
                   >
                     {feature.icon}
                   </Box>
-                  <Typography variant="h6" gutterBottom fontWeight="bold">
+                  <Typography variant="h5" gutterBottom fontWeight="bold" sx={{ mb: 2 }}>
                     {feature.title}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7 }}>
                     {feature.description}
                   </Typography>
                 </CardContent>
